@@ -181,7 +181,7 @@ StaffAbsencePlot <-
                date_labels = "%b %Y")+
   LinePlotTheme() +
   theme(plot.subtitle = element_markdown()) +
-  labs(title = paste0("Percentage absence rate (including isolation) 12 month rolling period"),
+  labs(title = paste0("Percentage absence rate 12 month rolling period"),
        subtitle = "<span style='color:#00A499;'>SFT, </span><span style='color:#330072;'>YDH, </span><span style='color:#005EB8;'>National (Acutes),</span>",
        caption = paste0("Source: Quality Scorecard, updated on ",
                         SystemTime))
