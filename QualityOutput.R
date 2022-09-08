@@ -223,7 +223,19 @@ MandatoryTrainingPlot <-
              size = 0.7) +
   geom_text(aes(x = as.Date("2021-04-01"),
                 y = 0.91,
-                label = "Standard = 90%"),
+                label = "SFT Standard = 90%"),
+            hjust = 0,
+            vjust = 0,
+            colour = NHSMidGrey,
+            size = 2,
+            check_overlap = TRUE) +
+  geom_hline(yintercept = 0.85,
+             linetype = "dashed",
+             color = NHSMidGrey,
+             size = 0.7) +
+  geom_text(aes(x = as.Date("2021-04-01"),
+                y = 0.86,
+                label = "YDHStandard = 85%"),
             hjust = 0,
             vjust = 0,
             colour = NHSMidGrey,
@@ -232,7 +244,7 @@ MandatoryTrainingPlot <-
   geom_hline(yintercept = 0,
              size = 0.5,
              colour = "#000000") +
-  scale_y_continuous(limits = c(0.85,
+  scale_y_continuous(limits = c(0.8,
                                 1),
                      expand = c(0,
                                 0),
