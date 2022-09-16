@@ -3,7 +3,7 @@ source("SetupNew.R")
 
 
 CDPdata <- 
-  read_excel("S:/Shared Area/Somerset Performance/Performance Framework Monitoring/Mental health Benchmarking/Mental health core data pack/2022-2023/Aug_CDPdata.xlsx") %>% 
+  read_excel("S:/Shared Area/Somerset Performance/Performance Framework Monitoring/Mental health Benchmarking/Mental health core data pack/CDPdata - current.xlsx") %>% 
   filter(`STP Code` %in% c("QSL", "E54000038"),
          `Org_Type` =="STP",
          `Reporting Period` >= "2021-04-01",
@@ -48,7 +48,7 @@ filter(!ColName %in% 7:9) %>%
 
 
 
-IAPTAccess <- read_excel("//somerset.xswhealth.nhs.uk/CCG/Directorate/Shared Area/Somerset Performance/Performance Report/2022-23/Board Assurance/Graphs/MH Graphs - 202206v1.xlsx", 
+IAPTAccess <- read_excel("//somerset.xswhealth.nhs.uk/CCG/Directorate/Shared Area/Somerset Performance/Performance Report/2022-23/Board Assurance/Graphs/MH Graphs - 202207v1.xlsx", 
                          sheet = "IAPT Data", range = "AD6:BA7", 
                          col_names = FALSE) %>% 
   mutate(Metric = c("Target", "IAPTAccess")) %>% 
@@ -57,7 +57,7 @@ IAPTAccess <- read_excel("//somerset.xswhealth.nhs.uk/CCG/Directorate/Shared Are
   mutate(Date =seq(as.Date("2021-04-01"), as.Date("2023-03-01"), by="month")) %>% 
   drop_na()
 
-IAPT6Week <- read_excel("//somerset.xswhealth.nhs.uk/CCG/Directorate/Shared Area/Somerset Performance/Performance Report/2022-23/Board Assurance/Graphs/MH Graphs - 202206v1.xlsx", 
+IAPT6Week <- read_excel("//somerset.xswhealth.nhs.uk/CCG/Directorate/Shared Area/Somerset Performance/Performance Report/2022-23/Board Assurance/Graphs/MH Graphs - 202207v1.xlsx", 
                          sheet = "IAPT Data", range = "AD23:BA23", 
                          col_names = FALSE) %>% 
   pivot_longer(everything(), names_to = "Date", values_to = "Count") %>% 

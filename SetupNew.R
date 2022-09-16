@@ -493,26 +493,6 @@ ECDSDateCommProvFilter <- function(x) {
                                "RH5",
                                "RA4")))}
 
-# SummariseActivity -------------------------------------------------------
-# Function
-SummariseActivity <- function(x) {
-  x |>
-    select(`MonthDate`,
-           `CommissionerCode`,
-           `CommissionerDescription`,
-           `ProviderCode`,
-           `ProviderDescription`,
-           `PlanningFlagCode`,
-           `PlanningFlagDescription`) |>
-    group_by(`MonthDate`,
-             `CommissionerCode`,
-             `CommissionerDescription`,
-             `ProviderCode`,
-             `ProviderDescription`,
-             `PlanningFlagCode`,
-             `PlanningFlagDescription`) |> 
-    summarise(`Activity` = n()) |> 
-    ungroup()}
 
 # CommPlotGroup -----------------------------------------------------------
 # Function
@@ -714,34 +694,4 @@ DataSQLConnectionASA <-
             database = "Analyst_SQL_Area",
             trustedconnection = TRUE)
 
-# CalWorDaysSQL -----------------------------------------------------------
-# Dataframe
-CalWorDaysSQLData <-
-  tbl(DataSQLConnectionDM,
-      in_schema("Reference",
-                "vw_DateTime_Lookup")) |>
-  filter(as.Date(`Date`) >= "2012-04-01") |> 
-  select(`Date`,
-         `WeekendFlag` = `Weekend_Flag`,
-         `BankHolidayFlag` = `BankHoliday_Flag`) |> 
-  collect() |> 
-  group_by(`Date`) |> 
-  mutate(`Days` = n()) |> 
-  group_by(`MonthDate` = floor_date(as.Date(`Date`),
-                                    "month")) |> 
-  select(`MonthDate`,
-         `WeekendFlag`,
-         `BankHolidayFlag`,
-         `Days`) |> 
-  group_by(`MonthDate`) |> 
-  summarise(`WeekendFlag` = sum(`WeekendFlag`),
-            `BankHolidayFlag` = sum(`BankHolidayFlag`),
-            `Days` = sum(`Days`)) |> 
-  ungroup() |>
-  mutate(`WorkingDays` = `Days`-`WeekendFlag`-`BankHolidayFlag`) |> 
-  select(`MonthDate`,
-         `Calendar` = `Days`,
-         `Working` = `WorkingDays`) |> 
-  pivot_longer(!`MonthDate`,
-               names_to = "DayType",
-               values_to = "Days")
+
